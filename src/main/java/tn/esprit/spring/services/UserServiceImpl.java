@@ -22,8 +22,15 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public List<User> retrieveAllUsers() { 
-
-		return null;
+         List<User> users = null;
+          try {
+           l.info("In retrieveAllUsers()");
+           users = (List<User>) userRepository.findAll();
+           l.info("Users retrieved successfully");
+          } catch (Exception e) {
+          l.error("Error in retrieveAllUsers() : " + e);
+          }
+         return users;
 	}
 
 
