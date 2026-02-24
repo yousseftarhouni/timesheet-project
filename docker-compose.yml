@@ -36,7 +36,18 @@ services:
     networks:
       - timesheet-network
     restart: on-failure
-
+  phpmyadmin:
+     image: phpmyadmin/phpmyadmin:latest
+     container_name: phpmyadmin-timesheet
+     depends_on:
+      - mysql
+     ports:
+      - "8089:80"
+     environment:
+       PMA_HOST: mysql
+       PMA_PORT: 3306
+     networks:
+      - timesheet-network
 volumes:
   timesheetvol:
 
