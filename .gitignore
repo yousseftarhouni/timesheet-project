@@ -4,3 +4,6 @@ target/
 .project
 .settings/
 *.log
+dependency-check-report/
+dependency-check-report.html
+dependency-check-report.xml
