@@ -1,0 +1,21 @@
+Feature: Detect SQL injection on the timesheet user-search endpoint
+
+  Background:
+    Given "curl" is installed
+    And the following profile:
+      | name | value                                                  |
+      | url  | http://__TARGET__/timesheet-devops/user/search-by-name |
+
+  Scenario: A normal name is accepted (the endpoint is alive)
+    When I launch a "curl" attack with:
+      """
+      curl -s -o /dev/null -w "%{http_code}" "<url>?name=John"
+      """
+    Then the output should contain "200"
+
+  Scenario: A single quote breaks the SQL query (injection is possible)
+    When I launch a "curl" attack with:
+      """
+      curl -s -o /dev/null -w "%{http_code}" "<url>?name=x%27"
+      """
+    Then the output should contain "500"

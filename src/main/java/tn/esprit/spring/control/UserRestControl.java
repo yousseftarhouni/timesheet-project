@@ -67,7 +67,7 @@ public class UserRestControl {
 	// ======================================================================
 	@GetMapping("/search-by-name")
 	public List<?> searchUserByNameVulnerable(@RequestParam("name") String name) {
-		String sql = "SELECT * FROM user WHERE first_name = '" + name + "'";
+		String sql = "SELECT * FROM T_USER WHERE first_name = '" + name + "'";
 		Query query = entityManager.createNativeQuery(sql, User.class);
 		return query.getResultList();
 	}
